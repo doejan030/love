@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For my love 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#0a0010;color:#fff;overflow-x:hidden;cursor:default}
+
+.page{display:none;min-height:100vh;position:relative;overflow:hidden}
+.page.active{display:flex;flex-direction:column;align-items:center;justify-content:center}
+
+#starsCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+
+.nav-dots{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:8px}
+.nav-dot{position:relative;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all .3s;border:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;padding:0}
+.nav-dot::before{content:'';position:absolute;inset:-8px;border-radius:50%}
+.nav-dot.active{background:#f472b6;transform:scale(1.4);box-shadow:0 0 10px #f472b6}
+@media(max-width:380px){.nav-dots{right:6px}.nav-dot{width:8px;height:8px}}
+
+.z1{position:relative;z-index:1}
+.section-inner{position:relative;z-index:1;width:100%;max-width:700px;padding:40px 20px;text-align:center}
+@media(max-width:400px){.section-inner{padding:32px 16px}}
+.eyebrow{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:#c084fc;margin-bottom:12px}
+.display{font-family:'Dancing Script',cursive;font-size:clamp(2.2rem,9vw,4.8rem);line-height:1.15}
+.grad-pink{background:linear-gradient(135deg,#f9a8d4,#c084fc,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-gold{background:linear-gradient(135deg,#fbbf24,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-cosmic{background:linear-gradient(135deg,#a78bfa,#60a5fa,#34d399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.body-text{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.92rem,2.5vw,1.1rem);color:#e9d5ff;line-height:1.85}
+.btn{display:inline-block;padding:13px 32px;border-radius:50px;border:none;font-family:'Inter',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .25s;letter-spacing:.5px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn-primary{background:linear-gradient(135deg,#f472b6,#e11d48);color:#fff;box-shadow:0 8px 30px rgba(244,114,182,.4)}
+.btn-primary:active{transform:scale(.97)}
+.btn-ghost{background:transparent;color:#c4b5fd;border:1.5px solid rgba(196,181,253,.4)}
+
+/* PAGE 0 LOCK */
+#p0{background:radial-gradient(ellipse at 50% 60%,#1a0535 0%,#0a0010 70%)}
+#p0 .lock-icon{font-size:4rem;animation:pulse 2s infinite}
+#p0 .lock-time{font-family:'Playfair Display',serif;font-size:clamp(3rem,12vw,6rem);font-weight:700;color:#fff;margin:12px 0 4px;letter-spacing:-2px}
+#p0 .lock-date{font-size:.85rem;letter-spacing:2px;color:#a78bfa;margin-bottom:40px}
+#p0 .swipe-hint{font-size:.8rem;color:rgba(255,255,255,.4);letter-spacing:2px;animation:fadeUpDown 2s infinite}
+@keyframes fadeUpDown{0%,100%{opacity:.4;transform:translateY(0)}50%{opacity:.9;transform:translateY(-6px)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+.notification-card{background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:14px 16px;max-width:300px;margin:0 auto 28px;display:flex;gap:12px;align-items:center;text-align:left;animation:slideDown .8s ease;width:90%}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.notif-icon{font-size:1.6rem;flex-shrink:0}
+.notif-title{font-size:.76rem;font-weight:600;color:#f9a8d4;margin-bottom:3px}
+.notif-msg{font-size:.8rem;color:#e9d5ff;line-height:1.4}
+
+/* PAGE 1 HERO */
+#p1{background:radial-gradient(ellipse at 30% 40%,#2d0a5e 0%,#0a0010 65%)}
+.hero-particles{position:absolute;inset:0;overflow:hidden;z-index:0}
+.hero-balloon{position:absolute;font-size:2rem;animation:balloonFloat linear infinite;opacity:.7}
+@keyframes balloonFloat{0%{transform:translateY(100vh) rotate(-10deg);opacity:0}10%{opacity:.7}90%{opacity:.7}100%{transform:translateY(-20vh) rotate(10deg);opacity:0}}
+.hero-age-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(244,114,182,.2),rgba(168,85,247,.2));border:1px solid rgba(244,114,182,.35);border-radius:50px;padding:8px 20px;font-size:.78rem;letter-spacing:2px;color:#fce7f3;margin-bottom:24px}
+.hero-kelavi{font-family:'Dancing Script',cursive;font-size:clamp(1rem,4vw,1.6rem);color:#a78bfa;margin-bottom:8px;font-weight:600}
+.hero-sub{font-size:clamp(.9rem,2.5vw,1.1rem);color:#c4b5fd;margin:16px 0 36px;line-height:1.7}
+.scroll-cta{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;color:#f472b6;animation:bounce 2s infinite;font-size:.75rem;letter-spacing:2px;text-transform:uppercase}
+.scroll-cta span{font-size:1.5rem}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* PAGE 2 CINEMA */
+#p2{background:#000;align-items:stretch;justify-content:flex-start;padding:0}
+.cinema-header{background:linear-gradient(180deg,#000 0%,transparent 100%);padding:50px 20px 0;text-align:center;position:relative;z-index:1}
+.film-strip{display:flex;overflow-x:auto;gap:0;padding:24px 0;scrollbar-width:none;position:relative;z-index:1;width:100%;-webkit-overflow-scrolling:touch}
+.film-strip::-webkit-scrollbar{display:none}
+.film-frame{flex:0 0 200px;margin:0 5px;position:relative}
+@media(min-width:480px){.film-frame{flex:0 0 240px}}
+.film-sprocket{background:#111;padding:7px 0;display:flex;justify-content:space-around}
+.film-hole{width:10px;height:16px;border-radius:3px;background:#000;border:1px solid #333}
+.film-image{height:170px;background:#0d0020;border-left:3px solid #222;border-right:3px solid #222;overflow:hidden;position:relative}
+.film-image img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.film-caption{background:#111;padding:8px 10px;border-left:3px solid #222;border-right:3px solid #222}
+.film-caption p{font-size:.74rem;color:#9ca3af;text-align:center;font-style:italic;line-height:1.4}
+.cinema-story{max-width:640px;margin:0 auto;padding:32px 20px 60px;position:relative;z-index:1;width:100%}
+@media(max-width:400px){.cinema-story{padding:24px 14px 60px}}
+.story-act{margin-bottom:28px;padding:20px;background:rgba(255,255,255,.04);border:1px solid rgba(192,132,252,.15);border-radius:16px;text-align:left}
+.act-label{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:#f59e0b;margin-bottom:6px}
+.act-title{font-family:'Dancing Script',cursive;font-size:1.45rem;color:#f9a8d4;margin-bottom:8px}
+.act-text{font-size:.88rem;color:#c4b5fd;line-height:1.75}
+
+/* PAGE 3 UNIVERSE */
+#p3{background:radial-gradient(ellipse at 50% 50%,#050018 0%,#000 100%)}
+.universe-orbs{position:absolute;inset:0;overflow:hidden;z-index:0}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;animation:orbFloat ease-in-out infinite}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-30px) scale(1.1)}}
+.planet{font-size:clamp(4rem,15vw,8rem);margin-bottom:20px;animation:planetSpin 20s linear infinite;display:inline-block}
+@keyframes planetSpin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.universe-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:24px 0;max-width:500px;width:100%}
+@media(min-width:480px){.universe-cards{grid-template-columns:repeat(3,1fr);gap:12px}}
+.uni-card{background:rgba(255,255,255,.05);border:1px solid rgba(167,139,250,.2);border-radius:14px;padding:14px 10px;text-align:center}
+.uni-card .uni-emoji{font-size:1.6rem;margin-bottom:6px}
+.uni-card .uni-text{font-size:.78rem;color:#c4b5fd;line-height:1.4}
+
+/* PAGE 4 FLIP CARDS */
+#p4{background:radial-gradient(ellipse at 70% 30%,#1a0535 0%,#0a0010 70%);align-items:stretch;justify-content:flex-start;padding:60px 0 80px}
+.reasons-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:680px;margin:0 auto;padding:0 16px;width:100%}
+@media(min-width:480px){.reasons-grid{grid-template-columns:repeat(3,1fr);gap:14px;padding:0 20px}}
+.flip-card{height:150px;perspective:1000px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+@media(max-width:380px){.flip-card{height:130px}}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}
+.flip-front{background:linear-gradient(135deg,rgba(168,85,247,.18),rgba(244,114,182,.12));border:1px solid rgba(192,132,252,.3)}
+.flip-back{background:linear-gradient(135deg,rgba(244,114,182,.2),rgba(168,85,247,.15));border:1px solid rgba(244,114,182,.4);transform:rotateY(180deg)}
+.flip-num{font-family:'Dancing Script',cursive;font-size:2rem;color:#c084fc;margin-bottom:2px}
+.flip-tap{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(196,181,253,.5)}
+.flip-emoji{font-size:1.6rem;margin-bottom:6px}
+.flip-reason{font-size:.78rem;color:#fce7f3;text-align:center;line-height:1.45;font-family:'Playfair Display',serif;font-style:italic}
+
+/* PAGE 5 MUSIC */
+#p5{background:linear-gradient(160deg,#0a001a 0%,#1a0010 50%,#000a1a 100%)}
+.vinyl{width:clamp(140px,42vw,210px);height:clamp(140px,42vw,210px);border-radius:50%;background:conic-gradient(#1a0535,#2d0050,#0d001a,#3d0060,#1a0535);border:5px solid #333;display:flex;align-items:center;justify-content:center;animation:spin 8s linear infinite;margin:0 auto 24px;box-shadow:0 0 50px rgba(168,85,247,.4),0 0 100px rgba(244,114,182,.2)}
+.vinyl-label{width:36%;height:36%;border-radius:50%;background:linear-gradient(135deg,#f472b6,#a855f7);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.48rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:#fff;text-align:center;line-height:1.3}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.lyric-lines{max-width:480px;margin:0 auto 24px;padding:0 4px}
+.lyric-line{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(.9rem,2.8vw,1.15rem);color:#e9d5ff;line-height:1.9;opacity:0;transform:translateY(10px);transition:all .5s}
+.lyric-line.visible{opacity:1;transform:translateY(0)}
+.lyric-line.highlight{font-size:clamp(1.05rem,3.2vw,1.4rem);background:linear-gradient(135deg,#f9a8d4,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:700}
+.eq-bars{display:flex;gap:4px;align-items:flex-end;height:36px;justify-content:center;margin-bottom:16px}
+.eq-bar{width:5px;border-radius:3px 3px 0 0;background:linear-gradient(to top,#f472b6,#a855f7);animation:eq linear infinite}
+@keyframes eq{0%,100%{height:6px}50%{height:var(--h)}}
+
+/* PAGE 6 PROPOSAL */
+#p6{background:radial-gradient(ellipse at 50% 100%,#1a0010 0%,#000 60%)}
+#fireworksCanvas{position:absolute;inset:0;z-index:0;pointer-events:none}
+.ring-animation{width:clamp(110px,30vw,170px);height:clamp(110px,30vw,170px);border-radius:50%;border:3px solid transparent;background:linear-gradient(#0a0010,#0a0010) padding-box,linear-gradient(135deg,#f472b6,#a855f7,#f59e0b) border-box;display:flex;align-items:center;justify-content:center;font-size:clamp(2.2rem,7vw,3.5rem);margin:0 auto 24px;animation:ringPulse 2s ease-in-out infinite}
+@keyframes ringPulse{0%,100%{box-shadow:0 0 0 0 rgba(244,114,182,.4),0 0 40px rgba(244,114,182,.2)}50%{box-shadow:0 0 0 16px rgba(244,114,182,0),0 0 70px rgba(244,114,182,.4)}}
+.proposal-q{font-family:'Dancing Script',cursive;font-size:clamp(1.6rem,5.5vw,2.8rem);color:#fce7f3;margin-bottom:8px;line-height:1.3}
+.proposal-sub{font-size:.85rem;color:#a78bfa;margin-bottom:28px;padding:0 8px}
+.answer-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
+.btn-always{background:linear-gradient(135deg,#f472b6,#e11d48);color:#fff;padding:15px 38px;border-radius:50px;border:none;font-size:1rem;font-weight:700;cursor:pointer;box-shadow:0 8px 30px rgba(225,29,72,.4);font-family:'Inter',sans-serif;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.btn-always:active{transform:scale(.96)}
+.btn-escape{background:transparent;border:1.5px solid rgba(196,181,253,.3);color:#9ca3af;padding:15px 38px;border-radius:50px;cursor:pointer;font-family:'Inter',sans-serif;font-size:1rem;-webkit-tap-highlight-color:transparent}
+#proposal-response{font-family:'Dancing Script',cursive;font-size:clamp(1.4rem,4.5vw,2.2rem);color:#f59e0b;min-height:50px;margin-top:8px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* PAGE 7 FINAL */
+#p7{background:radial-gradient(ellipse at 50% 50%,#1a0535 0%,#0a0010 70%)}
+.final-envelope{font-size:4.5rem;animation:envelopePop .8s ease backwards;margin-bottom:16px}
+@keyframes envelopePop{from{transform:scale(0) rotate(-10deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.final-letter{background:rgba(255,255,255,.04);border:1px solid rgba(244,114,182,.2);border-radius:20px;padding:28px 22px;max-width:560px;margin:0 auto 28px;text-align:left;position:relative}
+@media(max-width:400px){.final-letter{padding:22px 16px}}
+.final-letter::before{content:'❝';position:absolute;top:12px;left:14px;font-size:3rem;color:rgba(244,114,182,.15);font-family:'Playfair Display',serif;line-height:1}
+.final-sig{font-family:'Dancing Script',cursive;font-size:1.6rem;background:linear-gradient(135deg,#f472b6,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-top:18px;text-align:right}
+
+.float-emoji{position:fixed;bottom:-60px;pointer-events:none;z-index:999;animation:floatUp linear forwards}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0);opacity:.8}100%{transform:translateY(-110vh) rotate(30deg);opacity:0}}
+
+.page-transition{position:fixed;inset:0;background:#000;z-index:9998;pointer-events:none;opacity:0;transition:opacity .4s}
+.page-transition.active{opacity:1}
+</style>
+</head>
+<body>
+
+<canvas id="starsCanvas"></canvas>
+<div class="page-transition" id="transition"></div>
+<div class="nav-dots" id="navDots"></div>
+
+<!-- PAGE 0 — LOCK SCREEN -->
+<div class="page active" id="p0">
+  <div class="section-inner">
+    <div class="notification-card">
+      <div class="notif-icon">💌</div>
+      <div>
+        <div class="notif-title">Ishthiyaq — Now</div>
+        <div class="notif-msg">I made something for you. Tap to open it, My Bumblebee 🎂</div>
+      </div>
+    </div>
+    <div class="lock-icon">🔒</div>
+    <div class="lock-time" id="lockTime">--:--</div>
+    <div class="lock-date">June 26, 2026 · Your Birthday 🎂</div>
+    <button class="btn btn-primary" onclick="goTo(1)" style="margin-bottom:20px">Open your surprise 💖</button>
+    <div class="swipe-hint">✦ tap to begin ✦</div>
+  </div>
+</div>
+
+<!-- PAGE 1 — HERO -->
+<div class="page" id="p1">
+  <div class="hero-particles" id="balloons"></div>
+  <div class="section-inner">
+    <div class="hero-kelavi">For my loml 🐦</div>
+    <div class="hero-age-badge">🎂 &nbsp;Turning 21 &nbsp;·&nbsp; June 26, 2005 → 2026</div>
+    <h1 class="display grad-pink">Happy Birthday,<br>My Love</h1>
+    <p class="hero-sub">You are the most gorgeous, most dramatic,<br>most magnificently eye-having angry bird I have ever loved —<br>and I wouldn't trade you for anything in this world.</p>
+    <button class="btn btn-primary" onclick="goTo(2)" style="margin-bottom:16px">Our Story 🎬</button>
+    <div class="scroll-cta" onclick="goTo(2)"><span>↓</span>begin</div>
+  </div>
+</div>
+
+<!-- PAGE 2 — CINEMA -->
+<div class="page" id="p2" style="justify-content:flex-start;overflow-y:auto">
+  <div class="cinema-header section-inner" style="padding-bottom:0">
+    <p class="eyebrow">A film by Ishthiyaq & Asma</p>
+    <h2 class="display grad-pink" style="font-size:clamp(2rem,7vw,3.5rem)">Our Story 🎬</h2>
+    <p style="font-size:.82rem;color:#6b7280;margin-top:8px">1 year · 5 months · a million moments</p>
+  </div>
+
+  <div class="film-strip">
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/first.jpeg" alt="Our First Meet"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>The beginning of everything 🌸</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/eyes.jpeg" alt="Those Eyes"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>Those magnificent eyes 👁️</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/saree.jpeg" alt="My Favourite Photo"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>My favourite photo of you 😍</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/cuddle.jpeg" alt="Us Together"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>My favourite place 🫂</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/bike.jpeg" alt="Bike Ride"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>Adventures with you 🏍️</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/vc.jpeg" alt="Video Call"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>Hours that felt like minutes 📱</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/kiss.jpeg" alt="Kiss"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>My love for you 🌹</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/heart.jpeg" alt="Heart"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>You own this ❤️</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/random.jpeg" alt="Random Memory"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>A random day I never forgot 💫</p></div>
+    </div>
+
+    <div class="film-frame">
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-image">
+        <img src="images/bus.jpeg" alt="Bus Ride"/>
+      </div>
+      <div class="film-sprocket"><div class="film-hole"></div><div class="film-hole"></div><div class="film-hole"></div></div>
+      <div class="film-caption"><p>Even the ordinary felt special 🚌</p></div>
+    </div>
+
+  </div>
+
+  <div class="cinema-story">
+    <div class="story-act">
+      <div class="act-label">Act I · The Beginning</div>
+      <div class="act-title">Scene One — We Met 🌸</div>
+      <p class="act-text">Every great love story has a first scene. Ours started with you — walking in with those magnificent eyes, probably already annoyed about something. I was gone from that moment.</p>
+    </div>
+    <div class="story-act">
+      <div class="act-label">Act II · The Middle</div>
+      <div class="act-title">Scene Two — We Fought. We Stayed. 🌊</div>
+      <p class="act-text">1 year and 5 months of real love — which means real fights too. Tears, long silences, "I'm fine" when you were not fine. But also: the making up. The coming back. Every single time.</p>
+    </div>
+    <div class="story-act">
+      <div class="act-label">Act III · Right Now</div>
+      <div class="act-title">Scene Three — We're Still Here ✨</div>
+      <p class="act-text">Still calling. Still fighting about stupid things. Still laughing until it hurts. Still choosing each other. And on your 21st birthday — I choose you again, louder than ever.</p>
+    </div>
+    <div style="text-align:center;margin-top:30px">
+      <button class="btn btn-primary" onclick="goTo(3)">To the Universe 🌌</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 3 — UNIVERSE -->
+<div class="page" id="p3">
+  <div class="universe-orbs">
+    <div class="orb" style="width:300px;height:300px;background:#a855f7;top:-100px;left:-100px;animation-duration:8s"></div>
+    <div class="orb" style="width:200px;height:200px;background:#f472b6;bottom:-60px;right:-60px;animation-duration:6s;animation-delay:2s"></div>
+    <div class="orb" style="width:150px;height:150px;background:#3b82f6;top:40%;right:10%;animation-duration:10s;animation-delay:1s"></div>
+  </div>
+  <div class="section-inner">
+    <p class="eyebrow">across every dimension</p>
+    <div class="planet">🪐</div>
+    <h2 class="display grad-cosmic" style="margin-bottom:16px">I'd Find You<br>In Every Universe</h2>
+    <p class="body-text" style="margin-bottom:32px">In every timeline, every galaxy, every version of this world — I'd still end up falling for the girl with the magnificent eyes who fights with me and misses me at the same time.</p>
+    <div class="universe-cards">
+      <div class="uni-card"><div class="uni-emoji">🌊</div><div class="uni-text">In a world with no phones — I'd still find a way to annoy you</div></div>
+      <div class="uni-card"><div class="uni-emoji">🌌</div><div class="uni-text">In space — I'd name the angriest star after you</div></div>
+      <div class="uni-card"><div class="uni-emoji">📚</div><div class="uni-text">In a story — you'd be the most unforgettable character</div></div>
+      <div class="uni-card"><div class="uni-emoji">🎬</div><div class="uni-text">In a movie — you'd be the plot twist I never saw coming</div></div>
+      <div class="uni-card"><div class="uni-emoji">🌸</div><div class="uni-text">In any lifetime — those eyes would still stop me cold</div></div>
+      <div class="uni-card"><div class="uni-emoji">💫</div><div class="uni-text">In this one — you're already my favourite universe</div></div>
+    </div>
+    <button class="btn btn-primary" onclick="goTo(4)" style="margin-top:16px">Reasons I Love You 🗓️</button>
+  </div>
+</div>
+
+<!-- PAGE 4 — FLIP CARDS -->
+<div class="page" id="p4">
+  <div class="section-inner" style="max-width:720px">
+    <p class="eyebrow">tap each card</p>
+    <h2 class="display grad-pink" style="margin-bottom:8px">Why I Love You</h2>
+    <p style="font-size:.85rem;color:#9ca3af;margin-bottom:30px">21 reasons for your 21st birthday — tap to reveal 💖</p>
+  </div>
+  <div class="reasons-grid" id="reasonsGrid"></div>
+  <div style="text-align:center;margin-top:30px;position:relative;z-index:1">
+    <button class="btn btn-primary" onclick="goTo(5)">Our Song 🎵</button>
+  </div>
+</div>
+
+<!-- PAGE 5 — MUSIC -->
+<div class="page" id="p5">
+  <div class="section-inner">
+    <p class="eyebrow">our song</p>
+    <div class="vinyl"><div class="vinyl-label">PERFECT<br>Ed Sheeran</div></div>
+    <h2 class="display grad-pink" style="font-size:clamp(1.8rem,6vw,3rem);margin-bottom:6px">"Perfect"</h2>
+    <p style="font-size:.85rem;color:#9ca3af;margin-bottom:24px">Ed Sheeran · Because this is us</p>
+    <div class="eq-bars" id="eqBars"></div>
+    <div class="lyric-lines" id="lyricLines">
+      <p class="lyric-line">I found a love, for me...</p>
+      <p class="lyric-line">Darling, just dive right in, follow my lead...</p>
+      <p class="lyric-line highlight">Baby, I'm dancing in the dark</p>
+      <p class="lyric-line">with you between my arms...</p>
+      <p class="lyric-line highlight">Barefoot on the grass, listening to our favourite song...</p>
+      <p class="lyric-line">I have faith in what I see —</p>
+      <p class="lyric-line highlight">now I know I have met an angel in person</p>
+      <p class="lyric-line">and she looks perfect.</p>
+    </div>
+    <p class="body-text" style="margin-top:16px;font-size:.95rem">i Love you to the moon and back — the angry bird with the most magnificent eyes who somehow became my whole world. 🌙</p>
+    <button class="btn btn-primary" onclick="goTo(6)" style="margin-top:28px">The Big Moment 💍</button>
+  </div>
+</div>
+
+<!-- PAGE 6 — PROPOSAL -->
+<div class="page" id="p6">
+  <canvas id="fireworksCanvas"></canvas>
+  <div class="section-inner">
+    <p class="eyebrow">the question</p>
+    <div class="ring-animation">💍</div>
+    <h2 class="proposal-q">Kelavi,<br>will you keep being mine?</h2>
+    <p class="proposal-sub">For every fight, every call, every birthday still to come</p>
+    <div class="answer-btns">
+      <button class="btn-always" onclick="onYes()">Always & Forever 💖</button>
+      <button class="btn-escape" id="btnNo" onmouseover="moveNo()" ontouchstart="moveNo()">Not a chance 😅</button>
+    </div>
+    <div id="proposal-response"></div>
+  </div>
+</div>
+
+<!-- PAGE 7 — FINAL LETTER -->
+<div class="page" id="p7">
+  <div class="section-inner">
+    <div class="final-envelope">💌</div>
+    <p class="eyebrow">from my heart</p>
+    <h2 class="display grad-gold" style="margin-bottom:28px">For You, Always</h2>
+    <div class="final-letter">
+      <p class="body-text">
+        My pretty kitty,<br><br>
+        You are the most beautifully complicated person I have ever met. You fight with me like it's a sport, miss me like I'm your oxygen, and look at me with those eyes — those magnificent, impossible eyes — and every argument stops making sense.<br><br>
+        1 year and 5 months. A lot of tears. A lot of laughter. A lot of moments I screenshot in my memory because I never want to forget them.<br><br>
+        On your 21st birthday, I want you to know this: I am not just your boyfriend. I am the person who chose you — completely, fights and all — and will keep choosing you.<br><br>
+        Happy Birthday, my gorgeous angry bird. 🐦‍🔥
+      </p>
+      <div class="final-sig">Forever yours, Ishthiyaq 💍</div>
+    </div>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <button class="btn btn-ghost" onclick="goTo(0)">Start Over 🔁</button>
+      <button class="btn btn-primary" onclick="launchCelebration()">Celebrate! 🎉</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// STARS
+const sc=document.getElementById('starsCanvas'),sx=sc.getContext('2d');let stars=[];
+function initStars(){sc.width=window.innerWidth;sc.height=window.innerHeight;stars=Array.from({length:180},()=>({x:Math.random()*sc.width,y:Math.random()*sc.height,r:Math.random()*1.5+.3,a:Math.random(),da:Math.random()*.02-.01}))}
+function drawStars(){sx.clearRect(0,0,sc.width,sc.height);stars.forEach(s=>{s.a=Math.max(.1,Math.min(1,s.a+s.da));if(s.a<=.1||s.a>=1)s.da*=-1;sx.beginPath();sx.arc(s.x,s.y,s.r,0,Math.PI*2);sx.fillStyle=`rgba(255,255,255,${s.a})`;sx.fill()});requestAnimationFrame(drawStars)}
+window.addEventListener('resize',initStars);initStars();drawStars();
+
+// PAGES
+const pages=['p0','p1','p2','p3','p4','p5','p6','p7'];
+const pageLabels=['🔒','🎂','🎬','🌌','💖','🎵','💍','💌'];
+let current=0;
+const navDots=document.getElementById('navDots');
+pages.forEach((_,i)=>{const d=document.createElement('button');d.className='nav-dot'+(i===0?' active':'');d.title=pageLabels[i];d.onclick=()=>goTo(i);navDots.appendChild(d)});
+
+function goTo(idx){
+  if(idx===current)return;
+  const tr=document.getElementById('transition');
+  tr.classList.add('active');
+  setTimeout(()=>{
+    document.getElementById(pages[current]).classList.remove('active');
+    document.getElementById(pages[idx]).classList.add('active');
+    current=idx;
+    document.querySelectorAll('.nav-dot').forEach((d,i)=>d.classList.toggle('active',i===idx));
+    tr.classList.remove('active');
+    onPageEnter(idx);
+  },400);
+}
+
+function onPageEnter(idx){
+  if(idx===1)spawnBalloons();
+  if(idx===4)animateReasons();
+  if(idx===5)animateLyrics();
+  if(idx===6)startFireworks();
+  if(idx===7)launchFloatingEmojis(['🎉','💖','✨','🎊','💗','🌸']);
+}
+
+// CLOCK
+function updateClock(){const n=new Date();document.getElementById('lockTime').textContent=n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0')}
+updateClock();setInterval(updateClock,1000);
+
+// BALLOONS
+function spawnBalloons(){
+  const c=document.getElementById('balloons');c.innerHTML='';
+  const emojis=['🎈','🎉','💖','✨','🌸','💜','🎊','💗'];
+  for(let i=0;i<14;i++){const b=document.createElement('div');b.className='hero-balloon';b.textContent=emojis[i%emojis.length];b.style.left=Math.random()*100+'vw';b.style.animationDuration=(Math.random()*6+7)+'s';b.style.animationDelay=(Math.random()*5)+'s';b.style.fontSize=(Math.random()*1.5+1.2)+'rem';c.appendChild(b)}
+}
+
+// FLIP CARDS
+const reasons=[
+  {emoji:'👁️',text:'Those magnificent eyes that stop me every single time'},
+  {emoji:'😤',text:'The way you fight — dramatic, passionate, 100% you'},
+  {emoji:'🥺',text:'How you miss me even when you pretend you don\'t'},
+  {emoji:'📞',text:'Your voice on call at midnight when everything feels right'},
+  {emoji:'💪',text:'You\'re stronger than you know — and more beautiful for it'},
+  {emoji:'😂',text:'You make me laugh even when I\'m trying to be serious'},
+  {emoji:'🌊',text:'We survived every storm and came back every time'},
+  {emoji:'🐦',text:'The angry bird energy that I secretly love so much'},
+  {emoji:'📱',text:'The screenshots you take of our calls — so clingy, so perfect'},
+  {emoji:'🌙',text:'Late night conversations that felt like whole lifetimes'},
+  {emoji:'💌',text:'The way you text 10 times when I take 5 minutes to reply'},
+  {emoji:'🎭',text:'Your "I\'m fine" that means absolutely the opposite'},
+  {emoji:'🌸',text:'You bloom differently in every season and you\'re always gorgeous'},
+  {emoji:'🤝',text:'You choose to stay — even after the hard moments'},
+  {emoji:'✨',text:'The way your eyes light up when something makes you happy'},
+  {emoji:'🫂',text:'How safe I feel just knowing you\'re there'},
+  {emoji:'🎂',text:'Every birthday with you feels like a beginning'},
+  {emoji:'💫',text:'You make ordinary days feel like movies'},
+  {emoji:'🔥',text:'The fire in you — that passion is everything'},
+  {emoji:'🌹',text:'You love harder than you let on — and I see it'},
+  {emoji:'💍',text:'Because after 1 year 5 months — I\'d choose you again'}
+];
+function buildReasons(){
+  const g=document.getElementById('reasonsGrid');g.innerHTML='';
+  reasons.forEach((r,i)=>{g.innerHTML+=`<div class="flip-card" onclick="this.classList.toggle('flipped')"><div class="flip-inner"><div class="flip-front"><div class="flip-num">${i+1}</div><div class="flip-tap">tap me</div></div><div class="flip-back"><div class="flip-emoji">${r.emoji}</div><div class="flip-reason">${r.text}</div></div></div></div>`});
+}
+buildReasons();
+function animateReasons(){document.querySelectorAll('.flip-card').forEach(c=>c.classList.remove('flipped'))}
+
+// EQ BARS
+const eqC=document.getElementById('eqBars');
+for(let i=0;i<12;i++){const b=document.createElement('div');b.className='eq-bar';const h=Math.random()*28+8;b.style.setProperty('--h',h+'px');b.style.animationDuration=(Math.random()*.6+.4)+'s';b.style.animationDelay=(Math.random()*.4)+'s';eqC.appendChild(b)}
+
+// LYRICS
+function animateLyrics(){
+  const lines=document.querySelectorAll('.lyric-line');
+  lines.forEach(l=>l.classList.remove('visible'));
+  lines.forEach((l,i)=>setTimeout(()=>l.classList.add('visible'),i*400));
+}
+
+// NO BUTTON
+let noCount=0;
+function moveNo(){
+  noCount++;
+  const b=document.getElementById('btnNo');
+  if(noCount>8){b.style.display='none';return;}
+  b.style.position='fixed';b.style.zIndex='9999';
+  b.style.left=Math.random()*(window.innerWidth-160)+'px';
+  b.style.top=Math.random()*(window.innerHeight-60)+'px';
+  b.style.transition='all .2s';
+  if(noCount>4)b.textContent='STOP IT 😭';
+}
+
+// YES
+function onYes(){
+  document.getElementById('proposal-response').textContent='🎉 I knew it! I love you, my love! 💍✨';
+  launchFireworksBurst();
+  launchFloatingEmojis(['💍','💖','✨','🎉','💗','🌸','🥰','💫']);
+  setTimeout(()=>goTo(7),2800);
+}
+
+// FIREWORKS
+let fwAnimating=false,fwParticles=[];
+function startFireworks(){const canvas=document.getElementById('fireworksCanvas');canvas.width=window.innerWidth;canvas.height=window.innerHeight;fwAnimating=true;fwLoop(canvas)}
+function launchFireworksBurst(){const canvas=document.getElementById('fireworksCanvas');for(let i=0;i<6;i++)setTimeout(()=>createFirework(canvas),i*250)}
+function createFirework(canvas){const x=Math.random()*canvas.width,y=Math.random()*canvas.height*.6+50;const colors=['#f472b6','#a855f7','#f59e0b','#34d399','#60a5fa','#fb923c','#fff'];const color=colors[Math.floor(Math.random()*colors.length)];for(let i=0;i<50;i++){const angle=Math.random()*Math.PI*2,speed=Math.random()*5+2;fwParticles.push({x,y,vx:Math.cos(angle)*speed,vy:Math.sin(angle)*speed,life:1,color,size:Math.random()*3+1})}}
+function fwLoop(canvas){if(!fwAnimating)return;const ctx=canvas.getContext('2d');ctx.fillStyle='rgba(0,0,0,.18)';ctx.fillRect(0,0,canvas.width,canvas.height);fwParticles=fwParticles.filter(p=>p.life>0.01);fwParticles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.08;p.life*=.96;ctx.globalAlpha=p.life;ctx.fillStyle=p.color;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fill()});ctx.globalAlpha=1;if(Math.random()<.04)createFirework(canvas);requestAnimationFrame(()=>fwLoop(canvas))}
+
+// FLOATING EMOJIS
+function launchFloatingEmojis(pool){for(let i=0;i<20;i++){setTimeout(()=>{const e=document.createElement('div');e.className='float-emoji';e.textContent=pool[Math.floor(Math.random()*pool.length)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(Math.random()*1.5+1)+'rem';const dur=Math.random()*3+4;e.style.animationDuration=dur+'s';e.style.animationDelay=Math.random()*2+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),(dur+2.5)*1000)},i*120)}}
+
+function launchCelebration(){launchFloatingEmojis(['🎉','💖','✨','🎊','💗','🌸','🥰','🎈','💫','🎂'])}
+</script>
+</body>
+</html>
